@@ -24,7 +24,28 @@ export default {
     // 商品数量减一
     amountSub(state, iid) {
         let itemActive = state.cartList.find(item => item.iid == iid)
-        itemActive.amount--
+        // 当商品数量为小与1时，删除该商品
+        if (itemActive.amount <= 1) {
+            this.commit('delete', iid)
+        } else {
+            itemActive.amount--
+        }
+    },
+    // 被动删除
+    delete(state, iid) {
+        // 筛选出当前商品
+        let itemActive = state.cartList.find(item => item.iid == iid)
+        // 获取当前商品下标
+        let index = state.cartList.indexOf(itemActive);
+        state.cartList.splice(index, 1)
+    },
+    // 删除被选中的商品
+    deleteSelect(state) {
+        let shopSelect = state.cartList.filter(item => item.checked == true);
+        
+        shopSelect.forEach(item => {
+            this.commit('delete', item.iid)
+        })
     },
     // 将所有商品的复选框选中
     allTrue(state) {

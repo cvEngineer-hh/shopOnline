@@ -82,6 +82,7 @@ export default {
   font-size: 12px;
 }
 .none-goods {
-  margin: 150px 20px;
+  margin: 150px 0 0 10px;
+  
 }
 </style>

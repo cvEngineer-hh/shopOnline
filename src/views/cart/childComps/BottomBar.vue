@@ -15,7 +15,23 @@
       }}</span>
     </div>
     <!-- 结算按钮 -->
-    <div class="settle-accounts">结算</div>
+    <div class="settle-accounts">
+      <el-button-group>
+        <el-button round type="warning">
+          结算{{ "(" + totalLength + ")" }}
+        </el-button>
+        <el-button
+          round
+          class="detail-button detail-button2"
+          type="warning"
+          @click="deleteShop"
+        >
+          删除</el-button
+        >
+      </el-button-group>
+    </div>
+
+    <!-- <div >结算</div> -->
   </div>
 </template>
 
@@ -37,9 +53,12 @@ export default {
         this.$store.commit("allTrue");
       }
     },
+    deleteShop() {
+      this.$store.commit("deleteSelect");
+    },
   },
   computed: {
-    ...mapGetters(["totalAmount"]),
+    ...mapGetters(["totalAmount", "totalLength"]),
     barRadio() {
       // 如果购物车没有商品 返回false
       if (!this.$store.state.cartList.length) {
@@ -57,10 +76,10 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 #bottomBar {
   position: fixed;
-  bottom: 41px;
+  top: calc(100vh - 105px);
   width: 100vw;
   padding: 8px 10px;
   border-top: 1px #ddd solid;
@@ -82,7 +101,7 @@ export default {
 }
 .total {
   position: absolute;
-  right: 120px;
+  right: 170px;
   bottom: 8px;
 }
 .total--color {
@@ -90,11 +109,15 @@ export default {
 }
 .settle-accounts {
   float: right;
-  padding: 10px 15px;
-  width: 100px;
+}
+.el-button {
+  width: 70px;
+  margin-top: 4px;
+  padding: 10px 15px !important;
   color: #fff;
-  text-align: center;
-  border-radius: 40px;
-  background-image: linear-gradient(to bottom, #fec600, #fe4c00);
+  background-image: linear-gradient(to right, #fec600, #fe9502);
+}
+.detail-button2 {
+  background-image: linear-gradient(to right, #fe9502, #fe4c00);
 }
 </style>

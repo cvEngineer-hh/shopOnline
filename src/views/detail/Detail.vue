@@ -52,6 +52,8 @@ import GoodsList from "components/common/goods/GoodsList";
 import ScrollPack from "components/common/ScrollPack";
 import BackTop from "components/common/BackTop";
 
+import { imagesLoad } from "../../mixins/index";
+
 import {
   getDetail,
   getRecommend,
@@ -180,7 +182,7 @@ export default {
       this.recommend = res.data.list;
     });
   },
-  mounted() {
+  /*   mounted() {
     // 监听商品图片的加载
     this.$bus.$on("goodsImgLoad", () => {
       this.isImageLoad++;
@@ -196,7 +198,8 @@ export default {
         this.childCompTops.push(this.$refs.GoodsList.$el.offsetTop - 44);
       }
     });
-  },
+  }, */
+  mixins: [imagesLoad],
 };
 </script>
 
