@@ -10,9 +10,9 @@
     </div>
     <!-- 合计金额 -->
     <div class="total">
-      合计：<span class="total--color">{{
-        "￥" + totalAmount.toFixed(2)
-      }}</span>
+      合计：<span class="total--color">
+        {{ totalAmount | amount }}
+      </span>
     </div>
     <!-- 结算按钮 -->
     <div class="settle-accounts">
@@ -26,8 +26,8 @@
           type="warning"
           @click="deleteShop"
         >
-          删除</el-button
-        >
+          删除
+        </el-button>
       </el-button-group>
     </div>
 
@@ -72,6 +72,11 @@ export default {
   },
   components: {
     Radio,
+  },
+  filters: {
+    amount(totalAmount) {
+      return "￥" + totalAmount.toFixed(2);
+    },
   },
 };
 </script>

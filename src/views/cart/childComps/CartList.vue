@@ -5,7 +5,6 @@
       :key="item.iid"
       :cart="item"
       :index="index"
-      @click.native="cartItemClick(index)"
     >
     </cart-item>
   </div>
@@ -17,15 +16,11 @@ export default {
   name: "cartList",
   data() {
     return {
-      totalPrice: null,
+      
     };
   },
   methods: {
-    cartItemClick(index) {
-      this.totalPrice =
-        this.$store.state.cartList[index].amount *
-        this.$store.state.cartList[index].price;
-    },
+  
   },
   components: {
     CartItem,
